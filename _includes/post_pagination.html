@@ -1,0 +1,22 @@
+{% include base_path %}
+
+{% if page.id %}
+  {% assign current_post = page %}
+  {% assign prev = site.posts | where_exp:"post", "post.id != current_post.id" | where_exp:"post", "post.lang == current_post.lang" | where_exp:"post", "post.date <= current_post.date" | sort: "date" | reverse | first %}
+  {% assign next = site.posts | where_exp:"post", "post.id != current_post.id" | where_exp:"post", "post.lang == current_post.lang" | where_exp:"post", "post.date >= current_post.date" | sort: "date" | first %}
+  
+  {% if prev or next %}
+  <nav class="pagination">
+    {% if prev %}
+      <a href="{{ prev.url | prepend: base_path }}" class="pagination--pager" title="{{ prev.title | markdownify | strip_html }}">{{ site.data.ui-text[site.locale].pagination_previous | default: "Previous" }}</a>
+    {% else %}
+      <a href="#" class="pagination--pager disabled">{{ site.data.ui-text[site.locale].pagination_previous | default: "Previous" }}</a>
+    {% endif %}
+    {% if next %}
+      <a href="{{ next.url | prepend: base_path }}" class="pagination--pager" title="{{ next.title | markdownify | strip_html }}">{{ site.data.ui-text[site.locale].pagination_next | default: "Next" }}</a>
+    {% else %}
+      <a href="#" class="pagination--pager disabled">{{ site.data.ui-text[site.locale].pagination_next | default: "Next" }}</a>
+    {% endif %}
+  </nav>
+  {% endif %}
+{% endif %}

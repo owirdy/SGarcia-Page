@@ -1,0 +1,4 @@
+{% assign base_path = site.baseurl %}
+{% if site.url contains "github.io" and base_path == "" %}
+  {% assign base_path = "/" %}
+{% endif %}
