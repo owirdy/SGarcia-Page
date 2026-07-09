@@ -1,0 +1,18 @@
+{% include base_path %}
+
+{% if page.toc %}
+  {% assign contentsTitle = page.toc_label | default: 'Contents' %}
+  {% assign contents = content | toc_only %}
+  {% unless contents %}
+    {% assign contentsTitle = page.toc_label | default: 'Contents' %}
+    {% assign contents = content | markdownify | toc_only %}
+  {% endunless %}
+  {% if contents %}
+  <aside class="sidebar__right {% if page.toc_sticky %}sticky{% endif %}">
+    <nav class="toc">
+      <header><h4 class="nav__title"><i class="fas fa-{{ page.toc_icon | default: 'file-alt' }}"></i> {{ contentsTitle }}</h4></header>
+      {{ contents }}
+    </nav>
+  </aside>
+  {% endif %}
+{% endif %}

@@ -1,0 +1,18 @@
+{% include base_path %}
+
+{% if site.comments.provider %}
+  {% case site.comments.provider %}
+  {% when "disqus" %}
+    <section id="disqus_thread"></section>
+  {% when "discourse" %}
+    <div id="discourse-comments"></div>
+  {% when "facebook" %}
+    <section class="fb-comments" data-href="{{ page.url | prepend: site.url }}" data-numposts="{{ site.comments.facebook.num_posts }}" data-width="100%" data-colorscheme="{{ site.comments.facebook.colorscheme }}"></section>
+  {% when "google-plus" %}
+    <script src="https://apis.google.com/js/plusone.js"></script>
+  {% when "staticman" %}
+    <section id="static-comments"></section>
+  {% when "custom" %}
+    <section id="custom-comments"></section>
+  {% endcase %}
+{% endif %}
