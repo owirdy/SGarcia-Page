@@ -1,0 +1,10 @@
+---
+layout: default
+---
+{% assign collection = page.collection | default: 'posts' %}
+
+<div class="grid__wrapper">
+  {% for post in site[collection] %}
+    {% include archive-single.html type="grid" %}
+  {% endfor %}
+</div>
